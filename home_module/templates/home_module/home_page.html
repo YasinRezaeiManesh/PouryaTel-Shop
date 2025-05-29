@@ -1,0 +1,506 @@
+{% extends 'shared/_layout.html' %}
+{% load poll_extras %}
+
+
+{% block title %}
+    خانه
+{% endblock %}
+
+
+{% block content %}
+    <section class="main-slider">
+        <div class="container-fluid">
+            <div class="row gy-4">
+                <div class="col-xl-9 col-lg-8">
+                    <div class="home-slider shadow-box">
+                        <div class="slider__layer slider__layer--top"></div>
+                        <div class="slider__layer slider__layer--bottom"></div>
+                        <div class="swiper homeSlider swiper-initialized swiper-horizontal swiper-rtl swiper-backface-hidden"
+                             id="">
+                            <div class="swiper-wrapper" id="swiper-wrapper-6efd8d1091b10e00b3" aria-live="off"
+                                 style="transition-duration: 300ms; transform: translate3d(1416px, 0px, 0px);">
+                                {% for pic in slider_pic %}
+                                    <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 3"
+                                         data-swiper-slide-index="0" style="width: 678px; margin-left: 30px;">
+                                        <a href="">
+                                            <img alt="" class="img-fluid" src="{{ pic.image.url }}">
+                                        </a>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                            <div class="swiper-button-next d-lg-flex d-none" tabindex="0" role="button"
+                                 aria-label="Next slide" aria-controls="swiper-wrapper-6efd8d1091b10e00b3"></div>
+                            <div class="swiper-button-prev d-lg-flex d-none" tabindex="0" role="button"
+                                 aria-label="Previous slide" aria-controls="swiper-wrapper-6efd8d1091b10e00b3"></div>
+                            <div class="swiper-pagination-bg">
+                                <div>
+                                    <svg fill="none" height="75" viewBox="0 0 231 75" width="231"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path clip-rule="evenodd"
+                                              d="M0 0C31.5006 0.949537 50.52 17.872 56.1955 26.4544L55.986 25.8011L82.4924 58.631C99.3032 79.4521 131.038 79.4521 147.849 58.6309L174.356 25.8011L174.146 26.4544C179.822 17.872 198.844 0.949537 230.349 0H0Z"
+                                              fill="#FCFCFC" fill-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+                                    <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0"
+                                          role="button" aria-label="Go to slide 1" aria-current="true"></span><span
+                                        class="swiper-pagination-bullet" tabindex="0" role="button"
+                                        aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet"
+                                                                                tabindex="0" role="button"
+                                                                                aria-label="Go to slide 3"></span></div>
+                            </div>
+                            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4">
+                    <div class="swiper suggetMoment swiper-initialized swiper-horizontal swiper-rtl swiper-backface-hidden">
+                        <div class="swiper-wrapper position-relative" id="swiper-wrapper-60a952d481046fae0"
+                             aria-live="off"
+                             style="transition-duration: 500ms; transform: translate3d(714px, 0px, 0px);">
+
+
+                            {% for product in off_products %}
+                                <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 3"
+                                     data-swiper-slide-index="1" style="width: 327px; margin-left: 30px;">
+                                    <div class="product-box">
+                                        <div class="product-timer">
+                                            <div class="timer-label">
+                                                <span>{{ product.perc_off }}% تخفیف</span>
+                                            </div>
+                                            <div class="timer">
+                                                <div class="countdown" data-date="2027-01-01" data-time="18:30">
+                                                    <div class="countdown-container seconds"><span
+                                                            class="countdown-value seconds-bottom">14</span><span
+                                                            class="countdown-heading seconds-top">ثانیه</span></div>
+                                                    <div class="countdown-container minutes"><span
+                                                            class="countdown-value minutes-bottom">30</span><span
+                                                            class="countdown-heading minutes-top">دقیقه</span></div>
+                                                    <div class="countdown-container hours"><span
+                                                            class="countdown-value hours-bottom">23</span><span
+                                                            class="countdown-heading hours-top">ساعت</span></div>
+                                                    <div class="countdown-container days"><span
+                                                            class="countdown-value days-bottom">658</span><span
+                                                            class="countdown-heading days-top">روز</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-image">
+                                            <img alt="" class="img-fluid" src="{{ product.image.url }}">
+                                        </div>
+                                        <div class="product-title">
+                                            <div class="title">
+                                                <p class="title-font font-14">{{ product.title }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="product-action flex-column mt-3">
+                                            <div class="price d-flex justify-content-between w-100 align-items-baseline">
+                                                <p class="new-price">{{ product.off_price | three_digits_currency }}
+                                                    <span
+                                                            class="font-12">تومان</span></p>
+                                                <p class="old-price">{{ product.price | three_digits_currency }} </p>
+                                            </div>
+                                            <div class="link w-100 mt-4 d-flex align-items-center justify-content-between">
+                                                <a class="btn border-0 d-flex align-items-center rounded-3 main-color-one-bg"
+                                                   href="{% url 'product_detail' slug=product.slug %}">
+                                                    مشاهده
+                                                    <i class="bi bi-arrow-left ms-4 text-white"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="swiper-progress-bar active">
+                                <span class="slide_progress-bar"></span>
+                            </div>
+                        </div>
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="site-feature d-lg-block d-none">
+        <div class="container-fluid">
+            <div class="row py-3 pt-0 shadow-box rounded-3 row-cols-5 g-3 bg-white">
+                <div class="col border-end">
+                    <div class="feature-item ">
+                        <div class="feature-icon">
+                            <img src="/assets/image/feature/history.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="feature-desc ms-lg-3 text-center">
+                            <h6>بازگشـت وجـه
+                            </h6>
+                            <p class="text-muted my-2 d-none d-xl-block">در صورت عدم رضایت</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col border-end">
+                    <div class="feature-item ">
+                        <div class="feature-icon">
+                            <img src="/assets/image/feature/credit-card.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="feature-desc ms-lg-3 text-center">
+                            <h6>تضمین قیمت
+                            </h6>
+                            <p class="text-muted my-2 d-none d-xl-block">کمترین قیمت بازار
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col border-end">
+                    <div class="feature-item ">
+                        <div class="feature-icon">
+                            <img src="/assets/image/feature/fast.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="feature-desc ms-lg-3 text-center">
+                            <h6>ارسـال سـریع
+                            </h6>
+                            <p class="text-muted my-2 d-none d-xl-block">امن و مطمئن</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col border-end">
+                    <div class="feature-item ">
+                        <div class="feature-icon">
+                            <img src="/assets/image/feature/headphone.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="feature-desc ms-lg-3 text-center">
+                            <h6>پشتیبانی عالی
+                            </h6>
+                            <p class="text-muted my-2 d-none d-xl-block">در صورت عدم رضایت</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="feature-item ">
+                        <div class="feature-icon">
+                            <img src="/assets/image/feature/badge.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="feature-desc ms-lg-3 text-center">
+                            <h6>اصالت کالا
+                            </h6>
+                            <p class="text-muted my-2 d-none d-xl-block">امن و مطمئن</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="category-card">
+        <div class="container-fluid">
+            <div class="product-slider-box-title">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 col-6">
+                        <h4 class="title-font product-slider-box-title-title dot">
+                            <span class="main-color-one-color">دسته</span>
+                            <span>بندی</span>
+                        </h4>
+                    </div>
+                    <div class="col-lg-4 col-6">
+                        <div class="text-end">
+                            <a href="{% url 'product_list' %}" class="btn main-color-one-bg rounded-3">مشاهده همه</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4">
+                {% for category in categories %}
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <a href="{% url 'product_cat' url_cat=category.url_title %}">
+                            <div class="category-card-item running-top">
+                                <div class="category-card-item-image">
+                                    <img src="{{ category.image.url }}" alt="">
+                                </div>
+                                <div class="category-card-item-title">
+                                    <h3 class="fw-bold text-overflow-1 h6">
+                                        <span class="main-color-one-color">{{ category.title }}</span>
+                                    </h3>
+                                    <span class="d-inline-block mt-2">
+                                        مشاهده
+                                        <i class="bi bi-arrow-left ms-1"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+    <section class="amazing my-25 py-40 shadow-box">
+        <div class="container-fluid">
+            <div class="swiper free-mode swiper-initialized swiper-horizontal swiper-free-mode swiper-rtl swiper-backface-hidden"
+                 id="amazing">
+                <div class="swiper-wrapper align-items-center" id="swiper-wrapper-d2db0ac34f4421910" aria-live="polite">
+                    <div class="swiper-slide ml-0 swiper-slide-active" role="group" aria-label="1 / 7"
+                         style="margin-left: 10px;">
+                        <div class="d-flex justify-content-center align-items-center flex-column">
+                            <img src="/assets/image/amazingv2.png" class="img-fluid amazing-image" alt="">
+                            <a href="{% url 'product_list' %}" class="mt-2 text-white">مشاهده همه <i
+                                    class="bi bi-arrow-left-short"></i></a>
+                        </div>
+                    </div>
+                    {% for product in off_products %}
+                        <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 7"
+                             style="margin-left: 10px;">
+                            <div class="product-box">
+                                <div class="product-image">
+                                    <img alt="" class="img-fluid" src="{{ product.image.url }}">
+                                </div>
+                                <div class="product-title">
+                                    <div class="title">
+                                        <p class="title-font font-14">{{ product.title }}</p>
+                                    </div>
+                                </div>
+                                <div class="product-action flex-column mt-3">
+                                    <div class="price d-flex justify-content-between w-100 align-items-baseline">
+                                        <p class="new-price">{{ product.off_price | three_digits_currency }} <span
+                                                class="font-12">تومان</span></p>
+                                        <p class="old-price">{{ product.price | three_digits_currency }} </p>
+                                    </div>
+                                    <div class="link w-100 mt-4 d-flex align-items-center justify-content-between">
+                                        <a class="btn border-0 d-flex align-items-center rounded-3 main-color-one-bg"
+                                           href="{% url 'product_detail' slug=product.slug %}">
+                                            مشاهده
+                                            <i class="bi bi-arrow-left ms-4 text-white"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next d-sm-flex d-none" tabindex="0" role="button" aria-label="Next slide"
+                     aria-controls="swiper-wrapper-d2db0ac34f4421910" aria-disabled="false"></div>
+                <div class="swiper-button-prev d-sm-flex d-none swiper-button-disabled" tabindex="-1" role="button"
+                     aria-label="Previous slide" aria-controls="swiper-wrapper-d2db0ac34f4421910"
+                     aria-disabled="true"></div>
+                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+        </div>
+    </section>
+    <section class="product-slider  site-slider">
+        <div class="container-fluid">
+            <div class="product-slider-box-title">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 col-6">
+                        <h4 class="title-font product-slider-box-title-title dot">
+                            <span class="main-color-one-color">گوشی</span>
+                            <span>موبایل</span>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper pro-slider swiper-initialized swiper-horizontal swiper-rtl swiper-backface-hidden">
+                <div class="swiper-wrapper align-items-center" id="swiper-wrapper-acdd8199f344f324" aria-live="polite">
+                    {% for mobile in mobiles %}
+                        <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 7"
+                             style="width: 333.333px; margin-left: 10px;">
+                            <div class="product-box">
+                                <div class="product-image">
+                                    <img alt="" class="img-fluid" src="{{ mobile.image.url }}">
+                                </div>
+                                <div class="product-title">
+                                    <div class="title">
+                                        <p class="title-font font-14">{{ mobile.title }}</p>
+                                    </div>
+                                </div>
+                                <div class="product-action flex-column mt-3">
+                                    <div class="price d-flex justify-content-between w-100 align-items-baseline">
+                                        {% if mobile.off %}
+                                            <p class="new-price">{{ mobile.off_price | three_digits_currency }} <span
+                                                    class="font-12">تومان</span></p>
+                                            <p class="old-price">{{ mobile.price | three_digits_currency }}</p>
+                                        {% else %}
+                                            <p class="new-price">{{ mobile.price | three_digits_currency }} <span
+                                                    class="font-12">تومان</span></p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="link w-100 mt-4 d-flex align-items-center justify-content-between">
+                                        <a class="btn border-0 d-flex align-items-center rounded-3 main-color-one-bg"
+                                           href="{% url 'product_detail' slug=mobile.slug %}">
+                                            مشاهده
+                                            <i class="bi bi-arrow-left ms-4 text-white"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide"
+                     aria-controls="swiper-wrapper-acdd8199f344f324" aria-disabled="false"></div>
+                <div class="swiper-button-prev swiper-button-disabled" tabindex="-1" role="button"
+                     aria-label="Previous slide" aria-controls="swiper-wrapper-acdd8199f344f324"
+                     aria-disabled="true"></div>
+                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+        </div>
+    </section>
+    <section class="product-slider  site-slider">
+        <div class="container-fluid">
+            <div class="product-slider-box-title">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 col-6">
+                        <h4 class="title-font product-slider-box-title-title dot">
+                            <span class="main-color-one-color">محصولات</span>
+                            <span>جدید</span>
+                        </h4>
+                    </div>
+                    <div class="col-lg-4 col-6">
+                        <div class="text-end">
+                            <a href="{% url 'product_list' %}" class="btn main-color-one-bg rounded-3">مشاهده همه</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper pro-slider swiper-initialized swiper-horizontal swiper-rtl swiper-backface-hidden">
+                <div class="swiper-wrapper align-items-center" id="swiper-wrapper-9c1a0569b63fef4e" aria-live="polite">
+                    {% for product in products %}
+                        <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 7"
+                             style="width: 333.333px; margin-left: 10px;">
+                            <div class="product-box">
+                                <div class="product-image">
+                                    <img alt="" class="img-fluid" src="{{ product.image.url }}">
+                                </div>
+                                <div class="product-title">
+                                    <div class="title">
+                                        <p class="title-font font-14">{{ product.title }}</p>
+                                    </div>
+                                </div>
+                                <div class="product-action flex-column mt-3">
+                                    <div class="price d-flex justify-content-between w-100 align-items-baseline">
+                                        {% if product.off %}
+                                            <p class="new-price">{{ product.off_price | three_digits_currency }} <span
+                                                    class="font-12">تومان</span></p>
+                                            <p class="old-price">{{ product.price | three_digits_currency }}</p>
+                                        {% else %}
+                                            <p class="new-price">{{ product.price | three_digits_currency }} <span
+                                                    class="font-12">تومان</span></p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="link w-100 mt-4 d-flex align-items-center justify-content-between">
+                                        <a class="btn border-0 d-flex align-items-center rounded-3 main-color-one-bg"
+                                           href="{% url 'product_detail' slug=product.slug %}">
+                                            مشاهده
+                                            <i class="bi bi-arrow-left ms-4 text-white"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide"
+                     aria-controls="swiper-wrapper-9c1a0569b63fef4e" aria-disabled="false"></div>
+                <div class="swiper-button-prev swiper-button-disabled" tabindex="-1" role="button"
+                     aria-label="Previous slide" aria-controls="swiper-wrapper-9c1a0569b63fef4e"
+                     aria-disabled="true"></div>
+                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+        </div>
+    </section>
+    <section class="offers">
+        <div class="container-fluid">
+            <div class="offer slider-parent">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="swiper swiper-fade swiper-initialized swiper-horizontal swiper-rtl swiper-watch-progress swiper-backface-hidden"
+                             id="offerItem">
+                            <div class="swiper-wrapper" id="swiper-wrapper-46b5a813d37e36a3" aria-live="off"
+                                 style="transition-duration: 0ms; transition-delay: 0ms;">
+
+
+                                {% for product in most_bought_product %}
+                                    <div class="swiper-slide swiper-slide-next" role="group" aria-label="3 / 6"
+                                         data-swiper-slide-index="2"
+                                         style="width: 678px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
+                                        <div class="offer-item">
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div class="offer-discount">
+                                                        <span>٪8 تخفیف</span>
+                                                    </div>
+                                                    <div class="offer-img">
+                                                        <img src="{{ product.image.url }}" alt=""
+                                                             class="img-fluid">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="offer-content">
+                                                        <div class="offer-title d-md-inline-block d-none">
+                                                            <h4>پرفروش ترین <span class="title-font">محصولات</span></h4>
+                                                        </div>
+                                                        <div class="offer-desc">
+                                                            <h4>
+                                                                {{ product.title }}
+                                                            </h4>
+                                                            <div class="offer-desc-price">
+                                                                {% if product.off %}
+                                                                    <span class="old">{{ product.price | three_digits_currency}} تومان</span>
+                                                                    <span class="new">{{ product.off_price | three_digits_currency}} تومان</span>
+                                                                {% else %}
+                                                                    <span class="new">{{ product.price | three_digits_currency}} تومان</span>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        <div class="offer-btn">
+                                                            <a href="{% url 'product_detail' slug=product.slug %}"><i class="bi bi-basket me-1"></i>
+                                                                بریم واسه
+                                                                خرید!</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                            <div class="swiper-pagination d-lg-none d-block swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+                                <span class="swiper-pagination-bullet" tabindex="0" role="button"
+                                      aria-label="Go to slide 1"></span><span
+                                    class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0"
+                                    role="button" aria-label="Go to slide 2" aria-current="true"></span><span
+                                    class="swiper-pagination-bullet" tabindex="0" role="button"
+                                    aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet"
+                                                                            tabindex="0" role="button"
+                                                                            aria-label="Go to slide 4"></span><span
+                                    class="swiper-pagination-bullet" tabindex="0" role="button"
+                                    aria-label="Go to slide 5"></span><span class="swiper-pagination-bullet"
+                                                                            tabindex="0" role="button"
+                                                                            aria-label="Go to slide 6"></span></div>
+                            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+                    </div>
+                    <div class="col-lg-4 d-lg-block d-none">
+                        <div class="offer-item-link">
+                            <div class="swiper swiper-initialized swiper-horizontal swiper-free-mode swiper-rtl swiper-watch-progress swiper-backface-hidden swiper-thumbs"
+                                 id="offerItemLink">
+                                <div class="swiper-wrapper" id="swiper-wrapper-ec87c6fae4a98b41" aria-live="polite"
+                                     style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms; transition-delay: 0ms;">
+                                    {% for product in most_bought_product %}
+                                        <div class="swiper-slide swiper-slide-visible swiper-slide-fully-visible swiper-slide-active"
+                                             role="group" aria-label="1 / 6" style="width: 64.5px; margin-left: 10px;">
+                                            <div class="offer-item-link-item shadow-sm swiper-slide-active">
+                                                <h6>
+                                                    {{ product.title }}
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+                                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

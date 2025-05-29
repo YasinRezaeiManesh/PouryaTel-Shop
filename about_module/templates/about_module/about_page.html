@@ -1,0 +1,53 @@
+{% extends 'shared/_layout.html' %}
+
+
+{% block title %}
+    درباره ما
+{% endblock %}
+
+
+{% block content %}
+    <section class="content my-25">
+        <div class="container-fluid">
+            <div class="row gy-3 align-items-center">
+                <div class="col-lg-6">
+                    <div class="about-us-title">
+                        <h2 class="title-font"><span class="main-color-one-color">فروشگاه</span> آنلاین </h2>
+                        <h3 class="fw-normal">{{ about.site_name }}</h3>
+                    </div>
+                    <p class="text-muted text-justify font-16">{{ about.description_1 }}</p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="{{ about.pic_1.url }}" alt="">
+                </div>
+            </div>
+            <div class="about-us py-20">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6 order-lg-1 order-2">
+                            <div class="about-us-image">
+                                <img src="{{ about.pic_2.url }}" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 order-lg-2 order-1">
+                            <div class="about-us-desc">
+                                <div class="about-us-title">
+                                    <div class="row align-items-center gy-3">
+                                        <div>
+                                            <h6 class="main-color-one-color fs-3">{{ about.title_2 }}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="about-us-text">
+                                    <p class="text-muted text-justify mb-0 mt-3">
+                                        {{ about.description_2 }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

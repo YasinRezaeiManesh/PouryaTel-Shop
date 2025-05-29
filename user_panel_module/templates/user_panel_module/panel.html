@@ -1,0 +1,81 @@
+{% extends 'shared/_layout.html' %}
+{% load render_partial %}
+
+
+{% block title %}
+    پنل کاربری
+{% endblock %}
+
+
+{% block content %}
+    <section class="content my-25">
+        <div class="container-fluid">
+            <div class="row">
+                {% render_partial 'user_panel_module.views.panel_menu' %}
+                <div class="col-lg-9">
+                    <div class="product-slider-box-title">
+                        <div class="row align-items-center">
+                            <div class="col-lg-8 col-6">
+                                <h4 class="title-font product-slider-box-title-title dot">
+                                    <span class="main-color-one-color">پروفایل</span>
+                                </h4>
+                            </div>
+                            <div class="col-lg-4 col-6">
+                                <div class="text-end">
+                                    <a href="{% url 'edit_panel' %}"
+                                       class="btn main-color-one-bg rounded-3"><i class="bi bi-pencil-square"></i>
+                                        ویرایش</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card rounded-4 slider-parent">
+                        <div class="card-body">
+                            <div class="account-settings d-flex align-items-center">
+                                <div class="user-profile d-flex align-items-center">
+                                    <div class="user-avatar">
+                                        {% if user.avatar %}
+                                        	<img src="{{ user.avatar.url }}" width="100px" style="border-radius: 100%" alt="Maxwell Admin">
+                                        {% endif %}
+                                    </div>
+                                    <div class="ms-3">
+                                        <h5 class="user-name font-15">{{ user.first_name }} {{ user.last_name }}</h5>
+                                        <p class="user-email text-muted font-14">{{ user.email }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-custom slider-parent bg-transparent p-0">
+                        <div class="table-responsive shadow-box roundedTable p-0">
+                            <table class="table main-table rounded-0">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <h6 class="fw-bold font-15 text-muted ">نام و نام خانوادگی:</h6>
+                                        <p class=" mt-2 font-14">{{ user.first_name }} {{ user.last_name }}</p>
+                                    </td>
+                                    <td>
+                                        <h6 class="text-muted fw-bold font-15 ">شماره تلفن:</h6>
+                                        <p class=" mt-2 font-14">{{ user.number }}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h6 class="fw-bold font-15 text-muted">پست الکترونیک:</h6>
+                                        <p class=" mt-2 font-14">{{ user.email }}</p>
+                                    </td>
+                                    <td class="no-border">
+                                        <h6 class="fw-bold font-15  text-muted">آدرس: </h6>
+                                        <p class=" mt-2 font-14">{{ user.address }}</p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

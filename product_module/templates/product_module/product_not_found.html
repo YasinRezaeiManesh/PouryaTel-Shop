@@ -1,0 +1,32 @@
+{% extends 'shared/_layout.html' %}
+
+
+{% block title %}
+    جست و جو
+{% endblock %}
+
+
+{% block content %}
+    <section class="content my-25">
+        <div class="container-fluid">
+            <div class="content-box">
+                <div class="container-fluid">
+
+                    <h1 class="d-sm-none text-center mb-4 main-color-one-color display-1 fw-bold">404</h1>
+                    <section class="error-container d-sm-block d-none">
+                        <span class="four"><span class="screen-reader-text">4</span></span>
+                        <span class="zero"><span class="screen-reader-text">0</span></span>
+                        <span class="four"><span class="screen-reader-text">4</span></span>
+                    </section>
+
+                    <h1 class="fw-bold text-center">محصول مورد نظر یافت نشد</h1>
+                    <br>
+                    <div class="text-center">
+                        <a href="{% url 'home_page' %}" class="btn main-color-one-bg btn-lg">رفتن به صفحه اصلی</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

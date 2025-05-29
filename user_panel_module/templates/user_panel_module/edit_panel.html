@@ -1,0 +1,79 @@
+{% extends 'shared/_layout.html' %}
+{% load render_partial %}
+
+
+{% block title %}
+    پنل کاربری
+{% endblock %}
+
+
+{% block content %}
+    <section class="content my-25">
+        <div class="container-fluid">
+            <div class="row">
+                {% render_partial 'user_panel_module.views.panel_menu' %}
+                <div class="col-lg-9">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">ویرایش پروفایل</h1>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="modal-body">
+                                <form enctype="multipart/form-data" action="" method="post">
+                                    {% csrf_token %}
+                                    <div class="row g-4">
+                                        <div class="form-group">
+                                            <label for="uploadProfile" class="form-label">بارگذاری عکس
+                                                پروفایل</label>
+                                            {{ form.avatar }}
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="comment-item">
+                                                {{ form.first_name }}
+                                                <label for="floatingInputName"
+                                                       class="form-label label-float fw-bold font-16">نام
+                                                    <span class="text-danger">*</span></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="comment-item">
+                                                {{ form.last_name }}
+                                                <label for="floatingInputLName" class="form-label label-float fw-bold">نام
+                                                    خانوادگی
+                                                    <span class="text-danger">*</span></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="comment-item">
+                                                {{ form.address }}
+                                                <label for="floatingInputStreet" class="form-label label-float fw-bold">آدرس
+                                                    خیابان</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="comment-item">
+                                                {{ form.about_user }}
+                                                <label for="floatingInputTel" class="form-label label-float fw-bold">درباره
+                                                    شما</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <button type="submit" class="btn main-color-one-bg border-0">
+                                                    ویرایش پروفایل
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

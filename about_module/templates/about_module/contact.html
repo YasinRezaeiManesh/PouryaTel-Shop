@@ -1,0 +1,46 @@
+{% extends 'shared/_layout.html' %}
+
+
+{% block title %}
+    تماس با ما
+{% endblock %}
+
+
+{% block content %}
+    <section class="content my-25">
+        <div class="container-fluid">
+            <div class="product-slider-box-title">
+                <h4 class="title-font product-slider-box-title-title dot">
+                    <span class="main-color-one-color">تماس</span>
+                    <span>با ما</span>
+                </h4>
+            </div>
+            <div class="row gy-3">
+                <div class="col-12">
+                    <div class="single-address-parent border-ui">
+                        <div class="single_address">
+                            <i class="bi bi-pin-map"></i>
+                            <h4>آدرس فروشگاه</h4>
+                            <p>{{ info.address }}</p>
+                        </div>
+                        <div class="single_address">
+                            <i class="bi bi-envelope"></i>
+                            <h4>ایمیل فروشگاه</h4>
+                            <p>{{ contact.email }}</p>
+                        </div>
+                        <div class="single_address">
+                            <i class="bi bi-telephone"></i>
+                            <h4>شماره فروشگاه</h4>
+                            <p>{{ contact.mobile }}</p>
+                        </div>
+                        <div class="single_address">
+                            <i class="bi bi-clock-history"></i>
+                            <h4>ساعت کاری</h4>
+                            <p>{{ info.work_zone }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

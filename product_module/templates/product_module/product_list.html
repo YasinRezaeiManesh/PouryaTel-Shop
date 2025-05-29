@@ -1,0 +1,261 @@
+{% extends 'shared/_layout.html' %}
+{% load poll_extras %}
+
+
+{% block title %}
+    محصولات
+{% endblock %}
+
+
+{% block content %}
+    <section class="slider-category free-swiper">
+        <div class="container-fluid position-relative">
+
+            <div class="product-slider-box-title">
+                <h4 class="title-font product-slider-box-title-title dot">
+                    <span class="main-color-one-color">دسته</span>
+                    <span>بندی</span>
+                </h4>
+            </div>
+
+            <div class="swiper cat-slider">
+                <div class="swiper-wrapper">
+                    {% for category in categories %}
+                        <div class="swiper-slide">
+                            <a href="{% url 'product_cat' url_cat=category.url_title %}">
+                                <div class="category-card-item ">
+                                    <div class="category-card-item-image">
+                                        <img src="{{ category.image.url }}" alt="">
+                                    </div>
+                                    <div class="category-card-item-title">
+                                        <h3 class="fw-bold text-overflow-1 h6">
+                                            <span class="main-color-one-color">{{ category.title }}</span>
+                                        </h3>
+                                        <span class="d-inline-block mt-2">مشاهده <i
+                                                class="bi bi-arrow-left ms-1"></i></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--============ end slider category ==============-->
+
+
+    <!--============ start main content ==============-->
+
+    <section class="content my-25">
+        <div class="container-fluid">
+
+            <!-- start filter in mobile -->
+            <div class="custom-filter d-lg-none d-block">
+                <button class="btn btn-filter-float border-0 main-color-two-bg shadow-box px-3 rounded-3 position-fixed"
+                        style="z-index: 999;bottom:80px;" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                    <i class="bi bi-funnel font-20 fw-bold text-white"></i>
+                    <span class="d-block font-14 text-white">فیلتر</span>
+                </button>
+
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasRight"
+                     aria-labelledby="offcanvasRightLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title">فیلتر ها</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div class="filter-items position-sticky shadow-none top-0">
+                            <div class="container-fluid">
+                                <h5><a href="{% url 'product_list' %}" style="color: red">حذف فیلتر ها</a></h5>
+                                <br>
+                                <div class="filter-item">
+                                    <h5 class="filter-item-title">جستجو</h5>
+                                    <div class="filter-item-content">
+                                        <div class="search-form">
+                                            <form action="{% url 'search' %}" method="post">
+                                                {% csrf_token %}
+                                                <div class="search-filed">
+                                                    <label>
+                                                        <input name="search_input" type="text"
+                                                               placeholder="جستجوی محصولات ..."
+                                                               class="form-control search-input">
+                                                    </label>
+                                                    <button type="submit"
+                                                            class="btn search-btn main-color-one-bg rounded-pill"><i
+                                                            class="bi bi-search"></i></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="filter-item">
+                                    <h5 class="filter-item-title">موبایل</h5>
+                                    <div class="filter-item-content">
+                                        {% for mobile_company in mobile_companies %}
+                                            <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">
+                                                <div class="form-check">
+                                                    <a href="{% url 'mobile_company' url_mobile_company=mobile_company.url_address %}">{{ mobile_company.name }}</a>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                                <div class="filter-item">
+                                    <h5 class="filter-item-title">لوازم جانبی</h5>
+                                    <div class="filter-item-content">
+                                        {% for attachment in attachments %}
+                                            <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">
+                                                <div class="form-check">
+                                                    <a href="{% url 'attachment' url_attachment=attachment.url_address %}"
+                                                       class="link-opacity-25-hover">{{ attachment.name }}</a>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end filter mobile -->
+
+            <div class="row gy-3">
+                <div class="col-lg-3 d-lg-block d-none">
+                    <div class="filter-items position-sticky top-0">
+                        <div class="container-fluid">
+                            <div class="filter-item">
+                                <h5 class="filter-item-title">جستجو</h5>
+                                <div class="filter-item-content">
+                                    <div class="search-form">
+                                        <form action="{% url 'search' %}" method="post">
+                                            {% csrf_token %}
+                                            <div class="search-filed">
+                                                <label>
+                                                    <input name="search_input" type="text"
+                                                           placeholder="جستجوی محصولات ..."
+                                                           class="form-control search-input">
+                                                </label>
+                                                <button type="submit"
+                                                        class="btn search-btn main-color-one-bg rounded-pill"><i
+                                                        class="bi bi-search"></i></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5><a href="{% url 'product_list' %}" style="color: red">حذف فیلتر ها</a></h5>
+                            <br>
+                            <div class="filter-item">
+                                <h5 class="filter-item-title">موبایل</h5>
+                                <div class="filter-item-content">
+                                    {% for mobile_company in mobile_companies %}
+                                        <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">
+                                            <div class="form-check">
+                                                <a href="{% url 'mobile_company' url_mobile_company=mobile_company.url_address %}">{{ mobile_company.name }}</a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                            <div class="filter-item">
+                                <h5 class="filter-item-title">لوازم جانبی</h5>
+                                <div class="filter-item-content">
+                                    {% for attachment in attachments %}
+                                        <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">
+                                            <div class="form-check">
+                                                <a href="{% url 'attachment' url_attachment=attachment.url_address %}"
+                                                   class="link-opacity-25-hover">{{ attachment.name }}</a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="category-items">
+                        <div class="row g-3">
+                            {% for product in products %}
+                                <div class="col-lg-4">
+                                    <div class="product-box">
+                                        <div class="product-image">
+                                            <img alt="" class="img-fluid rounded-3"
+                                                 src="{{ product.image.url }}">
+                                        </div>
+                                        <div class="product-title">
+                                            <div class="title">
+                                                <p class="title-font font-14">{{ product.title }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="product-action flex-column mt-3">
+                                            <div class="price d-flex justify-content-between w-100 align-items-baseline">
+                                                {% if product.off %}
+                                                    <p class="new-price">{{ product.off_price | three_digits_currency }}
+                                                        <span
+                                                                class="font-12">تومان</span></p>
+                                                    <p class="old-price">{{ product.price | three_digits_currency }}</p>
+                                                {% else %}
+                                                    <p class="new-price">{{ product.price | three_digits_currency }}
+                                                        <span
+                                                                class="font-12">تومان</span></p>
+                                                {% endif %}
+                                            </div>
+                                            <div class="link w-100 mt-4 d-flex align-items-center justify-content-between">
+                                                <a class="btn border-0 d-flex align-items-center rounded-3 main-color-one-bg"
+                                                   href="{% url 'product_detail' slug=product.slug %}">
+                                                    مشاهده
+                                                    <i class="bi bi-arrow-left ms-4 text-white"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <div class="col-12">
+                                <div class="my-paginate my-4">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination flex-wrap justify-content-center">
+                                            {% if page_obj.has_previous %}
+                                                <li class="page-item">
+                                                    <a class="page-link rounded-3"
+                                                       href="?page={{ page_obj.previous_page_number }}">قبلی</a>
+                                                </li>
+                                            {% endif %}
+                                            {% for pageNumber in paginator.page_range %}
+                                                <li class="page-item {% if page_obj.number == pageNumber %}active{% endif %}">
+                                                    <a class="page-link rounded-3"
+                                                       href="?page={{ pageNumber }}">{{ pageNumber }}</a>
+                                                </li>
+                                            {% endfor %}
+                                            {% if page_obj.has_next %}
+                                                <li class="page-item">
+                                                    <a class="page-link rounded-3"
+                                                       href="?page={{ page_obj.next_page_number }}">بعدی</a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}

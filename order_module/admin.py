@@ -6,9 +6,9 @@ from .models import *
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["user", "is_paid", "is_close", "date_paid"]
 
 
 @admin.register(OrderDetail)
 class OrderDetailAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["order", "product"]

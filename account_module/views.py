@@ -1,3 +1,4 @@
+from django.http import HttpRequest
 from django.shortcuts import render
 from django.views import View
 from django.utils.crypto import get_random_string
@@ -5,6 +6,7 @@ from .forms import *
 from .models import User
 from django.shortcuts import redirect, reverse
 from django.contrib.auth import login, logout
+from utils.email_service import send_email
 
 
 # Create your views here.
@@ -86,3 +88,26 @@ class LogoutView(View):
     def get(self, request):
         logout(request)
         return redirect(reverse('home_page'))
+
+
+class ForgotPasswordView(View):
+    def get(self, request: HttpRequest):
+        forgot_form = ForgotPasswordForm()
+        context = {
+            'forgot_form': forgot_form
+        }
+        return render(request, 'account_module/forgot_page.html', context)
+
+    def post(self, request: HttpRequest):
+        forgot_form = ForgotPasswordForm(request.POST)
+        if forgot_form.is_valid():
+            user_email = forgot_form.cleaned_data.get('email')
+            user: User = User.objects.filter(email__iexact=user_email).first()
+            if user is not None:
+                send_email('بازیابی کلمه عبور', user.email, {'user': user}, 'email/forgot_password.html')
+            else:
+                forgot_form.add_error('email', 'ایمیل وارد شده وجود ندارد')
+        context = {
+            'forgot_form': forgot_form
+        }
+        return render(request, 'account_module/forgot_page.html', context)

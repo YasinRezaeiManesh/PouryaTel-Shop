@@ -105,6 +105,7 @@ class ForgotPasswordView(View):
             user: User = User.objects.filter(email__iexact=user_email).first()
             if user is not None:
                 send_email('بازیابی کلمه عبور', user.email, {'user': user}, 'email/forgot_password.html')
+                return redirect(reverse('home_page'))
             else:
                 forgot_form.add_error('email', 'ایمیل وارد شده وجود ندارد')
         context = {

@@ -73,3 +73,14 @@ class LoginForm(forms.Form):
             validators.MaxLengthValidator(100)
         ]
     )
+
+
+class ForgotPasswordForm(forms.Form):
+    email = forms.EmailField(
+        label='ایمیل',
+        widget=forms.EmailInput(attrs={'class': 'form-control'}),
+        validators=[
+            validators.MaxLengthValidator(100),
+            validators.EmailValidator
+        ]
+    )

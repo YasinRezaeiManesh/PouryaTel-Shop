@@ -87,12 +87,6 @@ class ForgotPasswordForm(forms.Form):
 
 
 class ResetPasswordForm(forms.Form):
-    current_password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
-        validators=[
-            validators.MaxLengthValidator(100)
-        ]
-    )
     new_password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control'}),
         validators=[

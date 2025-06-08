@@ -130,9 +130,7 @@ class ResetPasswordView(View):
         reset_form = ResetPasswordForm(request.POST)
         user: User = User.objects.filter(email_active_code__iexact=active_code).first()
         if reset_form.is_valid():
-            if user is None:
-                return redirect(reverse('home_page'))
-            else:
+            if user:
                 new_password = reset_form.cleaned_data.get('new_password')
                 user.set_password(new_password)
                 user.email_active_code = get_random_string(48)

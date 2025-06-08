@@ -124,7 +124,7 @@ class ResetPasswordView(View):
             'reset_form': reset_form,
             'user': user
         }
-        return render(request, 'account_module/reset_page', context)
+        return render(request, 'account_module/reset_page.html', context)
 
     def post(self, request: HttpRequest, active_code):
         reset_form = ResetPasswordForm(request.POST)
@@ -142,4 +142,4 @@ class ResetPasswordView(View):
             'reset_form': reset_form,
             'user': user
         }
-        return render(request, 'account_module/reset_page', context)
+        return render(request, 'account_module/reset_page.html', context)

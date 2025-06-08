@@ -112,3 +112,34 @@ class ForgotPasswordView(View):
             'forgot_form': forgot_form
         }
         return render(request, 'account_module/forgot_page.html', context)
+
+
+class ResetPasswordView(View):
+    def get(self, request: HttpRequest, active_code):
+        reset_form = ResetPasswordForm()
+        user: User = User.objects.filter(email_active_code__iexact=active_code).first()
+        if user is None:
+            return redirect(reverse('home_page'))
+        context = {
+            'reset_form': reset_form,
+            'user': user
+        }
+        return render(request, 'account_module/reset_page', context)
+
+    def post(self, request: HttpRequest, active_code):
+        reset_form = ResetPasswordForm(request.POST)
+        user: User = User.objects.filter(email_active_code__iexact=active_code).first()
+        if reset_form.is_valid():
+            if user is None:
+                return redirect(reverse('home_page'))
+            else:
+                new_password = reset_form.cleaned_data.get('new_password')
+                user.set_password(new_password)
+                user.email_active_code = get_random_string(48)
+                user.save()
+                return redirect(reverse('login'))
+        context = {
+            'reset_form': reset_form,
+            'user': user
+        }
+        return render(request, 'account_module/reset_page', context)

@@ -84,3 +84,32 @@ class ForgotPasswordForm(forms.Form):
             validators.EmailValidator
         ]
     )
+
+
+class ResetPasswordForm(forms.Form):
+    current_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        validators=[
+            validators.MaxLengthValidator(100)
+        ]
+    )
+    new_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        validators=[
+            validators.MaxLengthValidator(100)
+        ]
+    )
+    confirm_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        validators=[
+            validators.MaxLengthValidator(100)
+        ]
+    )
+
+    def clean_confirm_password(self):
+        new_password = self.cleaned_data.get('new_password')
+        confirm_password = self.cleaned_data.get('confirm_password')
+        if confirm_password == new_password:
+            return new_password
+        else:
+            ValidationError('کلمه عبور و تکرار کلمه عبور مغایرت دارند')

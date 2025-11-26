@@ -54,6 +54,8 @@ class Product(models.Model):
     is_mobile = models.BooleanField(verbose_name='موبایله؟', default=False)
     mobile_company = models.ForeignKey(MobileCompany, verbose_name='شرکت موبایل', on_delete=models.CASCADE, null=True,
                                        blank=True)
+    ram = models.CharField(max_length=100, verbose_name='مقدار رام', null=True, blank=True)
+    memory = models.CharField(max_length=100, verbose_name='مقدار حافظه', null=True, blank=True)
     image = models.ImageField(upload_to='images/product_images', verbose_name='تصویر')
     inventory = models.BooleanField(verbose_name='موجودی', default=True)
     slug = models.SlugField(unique=True, db_index=True, null=True, blank=True, verbose_name='عنوان در url',

@@ -5,6 +5,7 @@ from about_module.models import Contact, Info
 from .models import *
 from product_module.models import *
 from django.db.models import Count, Sum
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -36,6 +37,7 @@ def site_header_component(request):
     return render(request, 'shared/site_header_component.html', context)
 
 
+@login_required
 def site_footer_component(request):
     current_order, created = Order.objects.prefetch_related('orderdetail_set').get_or_create(is_paid=False,
                                                                                              user_id=request.user.id)

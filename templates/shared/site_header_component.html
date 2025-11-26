@@ -11,13 +11,14 @@
                         <div class="offcanvas offcanvas-start" tabindex="-1" id="responsiveMenu"
                              aria-labelledby="responsive menu">
                             <div class="offcanvas-header">
-                                <h5 class="offcanvas-title" id="offcanvasRightLabel"> فروشگاه  {{ info.site_name }}</h5>
+                                <h5 class="offcanvas-title" id="offcanvasRightLabel"> فروشگاه {{ info.site_name }}</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                                         aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
                                 <a href="{% url 'home_page' %}" class="text-center d-block mb-3">
-                                    <img src="{{ info.site_logo.url }}" alt="" class="rounded-3 img-fluid menu-responsive-logo">
+                                    <img src="{{ info.site_logo.url }}" alt=""
+                                         class="rounded-3 img-fluid menu-responsive-logo">
                                 </a>
                                 <div class="header-bottom-form mb-4 w-100">
                                     <div class="search-bar">
@@ -107,10 +108,12 @@
             </div>
             <div class="col-lg-4 col-6 order-lg-3 order-2">
                 <div class="d-flex justify-content-end align-items-center">
-                    <div class="position-relative me-3">
-                        <a href="{% url 'order' %}" role="button"
-                           class="btn main-color-green rounded-circle btn-float-cart"><i class="bi bi-bag"></i></a>
-                    </div>
+                    {% if request.user.is_authenticated %}
+                        <div class="position-relative me-3">
+                            <a href="{% url 'order' %}" role="button"
+                               class="btn main-color-green rounded-circle btn-float-cart"><i class="bi bi-bag"></i></a>
+                        </div>
+                    {% endif %}
                     <div class="bg-white header-btn-group shadow-sm rounded-pill">
                         <div class="dropdown">
                             <a href="" data-bs-toggle="dropdown" aria-expanded="false" role="button"
@@ -123,7 +126,8 @@
                                     <li><a href="{% url 'user_panel' %}" class="dropdown-item"><i
                                             class="bi bi-house-door me-2"></i>پروفایل</a>
                                     </li>
-                                    <li><a href="{% url 'order' %}" class="dropdown-item"><i class="bi bi-cart-check me-2"></i>سفارش های
+                                    <li><a href="{% url 'order' %}" class="dropdown-item"><i
+                                            class="bi bi-cart-check me-2"></i>سفارش های
                                         من</a></li>
                                     <hr class="dropdown-divider">
                                     </li>
